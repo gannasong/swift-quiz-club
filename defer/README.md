@@ -1,14 +1,13 @@
 # defer
---
-####參考資料
+#### 參考資料
 
 - [關於 Swift defer 的正確使用](https://onevcat.com/2018/11/defer/)
 - [How “defer” operator in Swift actually works](https://medium.com/@sergeysmagleev/how-defer-operator-in-swift-actually-works-30dbacb3477b)
 
-#TL;DR
+## TL;DR
 `defer`的目的就是進行資源清理和避免重複`return`前需要的執行的事項，而不是用來取巧地實現某些功能
 
-###Quiz
+### Quiz
 ```
 var count: Int = 5
 
@@ -25,7 +24,7 @@ count = increment()
 Completion Error
 
 ```
-###Solution
+### Solution
 ```
 Solution: 5
 
@@ -37,7 +36,7 @@ Therefore, the return value of 5 will be assigned to counter.
 
 ```
 
-####Why?
+#### Why?
 In `How “defer” operator in Swift actually works` Said:
 
 ```
@@ -48,16 +47,16 @@ Once it hits return the execution leaves the current scope, disposes all the loc
 ```
 圖1
 <p align="center"> 
-<img src="images/defer01.png">
+<img src="/images/defer01.png">
 </p>
 
 圖1
 <p align="center"> 
-<img src="images/defer02.png">
+<img src="/images/defer02.png">
 </p>
 
 可以對照`圖1`&`圖2`，有用顏色區分程式執行的時機點。可以看到`defer`是在`return`前被執行的。
 所以就這題而言，其實`count`的確有被`+1`，但最後又賦值回去，所以還是`5`。
 
-####NOTE
+#### NOTE
 - `defer`是在`當前 scope 退出的時候`調用
